@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive Images using srcset and sizes (Width Descriptors)</title>
+    <meta
+      name="description"
+      content="Demo showing srcset with width descriptors and sizes for responsive images"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: #f6f7f9;
+        margin: 0;
+        padding: 24px;
+        color: #1f2937;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      header h1 {
+        font-size: 28px;
+        margin: 0 0 12px;
+        line-height: 1.25;
+      }
+
+      header p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #4b5563;
+        margin: 0 0 12px;
+      }
+
+      /* Inline code for text, so it does not look like huge blocks */
+      code {
+        display: inline;
+        background: #eef2f7;
+        padding: 2px 8px;
+        border-radius: 8px;
+        font-size: 0.95em;
+        color: #111827;
+      }
+
+      .stats {
+        margin-top: 18px;
+        padding: 16px;
+        background: #f1f5f9;
+        border-radius: 12px;
+        font-size: 14px;
+        color: #111827;
+      }
+
+      .stats .row {
+        margin: 6px 0;
+      }
+
+      .grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .card {
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      }
+
+      /* Important change:
+       object-fit: contain ensures the full image is visible (no cropping)
+       background gives a clean letterbox area when aspect ratios differ */
+      .thumb {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        background: #e9eef5;
+        display: block;
+      }
+
+      .meta {
+        padding: 14px;
+        background: #f1f5f9;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .meta .label {
+        font-size: 13px;
+        color: #374151;
+        margin: 0 0 8px;
+        font-weight: 700;
+      }
+
+      /* Separate styling for long URLs */
+      .url {
+        display: block;
+        background: #e5e7eb;
+        padding: 10px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+        max-width: 100%;
+        word-break: break-all;
+        line-height: 1.45;
+        color: #111827;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .container {
+          padding: 24px;
+        }
+        header h1 {
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 16px;
+        }
+        .container {
+          padding: 18px;
+          border-radius: 12px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        header h1 {
+          font-size: 22px;
+        }
+        header p {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>Responsive Images using srcset and sizes (Width Descriptors)</h1>
+
+        <p>
+          This demo uses <code>srcset</code> with width descriptors (example:
+          640w, 1080w) and a simplified <code>sizes</code> rule. The browser
+          picks the best file based on the rendered image size and device pixel
+          ratio.
+        </p>
+
+        <p>
+          Resize the browser or use Chrome device emulator, then check the
+          selected URL shown under each image.
+        </p>
+
+        <p>
+          <strong>sizes used:</strong>
+          <code>(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw</code>
+        </p>
+      </header>
+
+      <div class="stats">
+        <div class="row">
+          <strong>Device Pixel Ratio:</strong> <span id="dpr"></span>
+        </div>
+        <div class="row">
+          <strong>Viewport width:</strong> <span id="vw"></span> px
+        </div>
+      </div>
+
+      <section class="grid" aria-label="Responsive image grid demo">
+        <!-- Card 1 -->
+        <article class="card">
+          <img
+            class="thumb responsive"
+            alt="Happy daughter"
+            src="https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-3840,c-at_max"
+            srcset="
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-256,c-at_max   256w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-384,c-at_max   384w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-640,c-at_max   640w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-750,c-at_max   750w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-828,c-at_max   828w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-1080,c-at_max 1080w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-1200,c-at_max 1200w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-1920,c-at_max 1920w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-2048,c-at_max 2048w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Happy%20daughter_uuqnhToxV.jpg?tr=w-3840,c-at_max 3840w
+            "
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+          />
+          <div class="meta">
+            <p class="label">Selected image URL</p>
+            <span class="url currentSrc">Loading…</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <img
+            class="thumb responsive"
+            alt="Smile"
+            src="https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-3840,c-at_max"
+            srcset="
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-256,c-at_max   256w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-384,c-at_max   384w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-640,c-at_max   640w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-750,c-at_max   750w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-828,c-at_max   828w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-1080,c-at_max 1080w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-1200,c-at_max 1200w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-1920,c-at_max 1920w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-2048,c-at_max 2048w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Smile_t2oV0fxJZ.jpg?tr=w-3840,c-at_max 3840w
+            "
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+          />
+          <div class="meta">
+            <p class="label">Selected image URL</p>
+            <span class="url currentSrc">Loading…</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <img
+            class="thumb responsive"
+            alt="Portrait photography of man"
+            src="https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-3840,c-at_max"
+            srcset="
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-256,c-at_max   256w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-384,c-at_max   384w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-640,c-at_max   640w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-750,c-at_max   750w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-828,c-at_max   828w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-1080,c-at_max 1080w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-1200,c-at_max 1200w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-1920,c-at_max 1920w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-2048,c-at_max 2048w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/portrait%20photography%20of%20man_MDQ926JLI.jpg?tr=w-3840,c-at_max 3840w
+            "
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+          />
+          <div class="meta">
+            <p class="label">Selected image URL</p>
+            <span class="url currentSrc">Loading…</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card">
+          <img
+            class="thumb responsive"
+            alt="CouponSnappy example"
+            src="https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-3840,c-at_max"
+            srcset="
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-256,c-at_max   256w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-384,c-at_max   384w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-640,c-at_max   640w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-750,c-at_max   750w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-828,c-at_max   828w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-1080,c-at_max 1080w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-1200,c-at_max 1200w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-1920,c-at_max 1920w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-2048,c-at_max 2048w,
+              https://ik.imagekit.io/Kashish12345/Demo/Responsive%20Image/Picture%20taken%20for%20CouponSna..._kOX-M-Ot3.jpg?tr=w-3840,c-at_max 3840w
+            "
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+          />
+          <div class="meta">
+            <p class="label">Selected image URL</p>
+            <span class="url currentSrc">Loading…</span>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      const dprEl = document.getElementById("dpr");
+      const vwEl = document.getElementById("vw");
+
+      const updateStats = () => {
+        dprEl.textContent = window.devicePixelRatio;
+        vwEl.textContent = window.innerWidth;
+      };
+
+      const updateCards = () => {
+        document.querySelectorAll(".card").forEach((card) => {
+          const img = card.querySelector("img.responsive");
+          const urlEl = card.querySelector(".currentSrc");
+          if (!img || !urlEl) return;
+          urlEl.textContent = img.currentSrc || img.src;
+        });
+      };
+
+      const updateAll = () => {
+        updateStats();
+        updateCards();
+      };
+
+      window.addEventListener("resize", updateAll);
+      window.addEventListener("orientationchange", updateAll);
+
+      document.querySelectorAll("img.responsive").forEach((img) => {
+        img.addEventListener("load", updateAll);
+      });
+
+      updateAll();
+    </script>
+  </body>
+</html>
