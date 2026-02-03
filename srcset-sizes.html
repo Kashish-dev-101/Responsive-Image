@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -15,7 +15,11 @@
       }
 
       body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
         background-color: #f6f7f9;
         margin: 0;
         padding: 24px;
@@ -115,7 +119,13 @@
         max-width: 100%;
         word-break: break-all;
         line-height: 1.45;
-        color: #111827;
+        color: #2563eb;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      .url:hover {
+        color: #1d4ed8;
       }
 
       @media (max-width: 900px) {
@@ -172,6 +182,16 @@
           <strong>sizes used:</strong>
           <code>(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw</code>
         </p>
+
+        <p>
+          Read more on how <code>srcset</code> and <code>sizes</code> attributes
+          work in our
+          <a
+            href="https://imagekit.io/responsive-images/#chapter-5---srcset-with-sizes"
+            target="_blank"
+            >Responsive Image Guide</a
+          >.
+        </p>
       </header>
 
       <div class="stats">
@@ -206,7 +226,9 @@
           />
           <div class="meta">
             <p class="label">Selected image URL</p>
-            <span class="url currentSrc">Loading…</span>
+            <a class="url currentSrc" href="#" target="_blank" rel="noopener">
+              Loading…
+            </a>
           </div>
         </article>
 
@@ -232,7 +254,9 @@
           />
           <div class="meta">
             <p class="label">Selected image URL</p>
-            <span class="url currentSrc">Loading…</span>
+            <a class="url currentSrc" href="#" target="_blank" rel="noopener">
+              Loading…
+            </a>
           </div>
         </article>
 
@@ -258,7 +282,9 @@
           />
           <div class="meta">
             <p class="label">Selected image URL</p>
-            <span class="url currentSrc">Loading…</span>
+            <a class="url currentSrc" href="#" target="_blank" rel="noopener">
+              Loading…
+            </a>
           </div>
         </article>
 
@@ -284,7 +310,9 @@
           />
           <div class="meta">
             <p class="label">Selected image URL</p>
-            <span class="url currentSrc">Loading…</span>
+            <a class="url currentSrc" href="#" target="_blank" rel="noopener">
+              Loading…
+            </a>
           </div>
         </article>
       </section>
@@ -304,7 +332,12 @@
           const img = card.querySelector("img.responsive");
           const urlEl = card.querySelector(".currentSrc");
           if (!img || !urlEl) return;
-          urlEl.textContent = img.currentSrc || img.src;
+
+          const pickedUrl = img.currentSrc || img.src;
+
+          urlEl.textContent = pickedUrl;
+          urlEl.href = pickedUrl;
+          urlEl.title = pickedUrl;
         });
       };
 
