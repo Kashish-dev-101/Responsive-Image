@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -11,10 +11,7 @@
     />
 
     <!-- Request Client Hints (legacy and modern formats) -->
-    <meta
-      http-equiv="Accept-CH"
-      content="DPR, Width, Viewport-Width, Sec-CH-DPR, Sec-CH-Width, Sec-CH-Viewport-Width"
-    />
+    <meta http-equiv="Accept-CH" content="Sec-CH-DPR, Sec-CH-Width" />
 
     <!-- Delegate Client Hints to ImageKit (cross origin) -->
     <meta
@@ -41,7 +38,11 @@
       }
 
       body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
         background-color: #f6f7f9;
         margin: 0;
         padding: 24px;
@@ -153,7 +154,13 @@
         max-width: 100%;
         word-break: break-all;
         line-height: 1.45;
-        color: #111827;
+        color: #2563eb;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      .url:hover {
+        color: #1d4ed8;
       }
 
       @media (max-width: 900px) {
@@ -195,10 +202,10 @@
         <h1>Responsive Images using Client Hints (ImageKit)</h1>
 
         <p>
-          This demo uses <code>w-auto</code> and <code>dpr-auto</code>. The
-          browser sends Client Hints like <code>DPR</code>, <code>Width</code>,
-          and <code>Viewport-Width</code>, and ImageKit responds with an
-          optimized image.
+          This demo uses ImageKit transformations <code>w-auto</code> and
+          <code>dpr-auto</code>. The browser sends Client Hints like
+          <code>DPR</code>, <code>Width</code>, and <code>Viewport-Width</code>,
+          and ImageKit responds with an optimized image.
         </p>
 
         <p>
@@ -206,9 +213,18 @@
           Network tab and check the request headers.
         </p>
 
-        <div class="pill-row">
+        <p>
+          Read more on how responsive images work using Client Hints in our
+          <a
+            href="https://imagekit.io/responsive-images/#chapter-7---using-client-hints"
+            target="_blank"
+            >Responsive Image Guide</a
+          >.
+        </p>
+
+        <div class="pill-row" style="margin-top: 16px">
           <span class="pill">Transformations: w-auto, dpr-auto</span>
-          <span class="pill">Hints: DPR, Width, Viewport-Width</span>
+          <span class="pill">Hints: Sec-CH-DPR, Sec-CH-Width</span>
           <span class="pill">Accept-CH + Delegate-CH enabled</span>
         </div>
       </header>
@@ -234,7 +250,9 @@
           />
           <div class="meta">
             <p class="label">Selected image URL</p>
-            <span class="url currentSrc">Loading…</span>
+            <a class="url currentSrc" href="#" target="_blank" rel="noopener"
+              >Loading…</a
+            >
           </div>
         </article>
 
@@ -249,7 +267,9 @@
           />
           <div class="meta">
             <p class="label">Selected image URL</p>
-            <span class="url currentSrc">Loading…</span>
+            <a class="url currentSrc" href="#" target="_blank" rel="noopener"
+              >Loading…</a
+            >
           </div>
         </article>
       </section>
@@ -269,7 +289,9 @@
           const img = card.querySelector("img.responsive");
           const urlEl = card.querySelector(".currentSrc");
           if (!img || !urlEl) return;
-          urlEl.textContent = img.currentSrc || img.src;
+          const src = img.currentSrc || img.src;
+          urlEl.textContent = src;
+          urlEl.href = src;
         });
       };
 

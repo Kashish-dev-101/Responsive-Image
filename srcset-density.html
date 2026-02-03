@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -15,7 +15,11 @@
       }
 
       body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
         background-color: #f6f7f9;
         margin: 0;
         padding: 24px;
@@ -109,7 +113,7 @@
 
   <body>
     <div class="container">
-      <h1>Responsive Images using srcset (DPR)</h1>
+      <h1>Responsive Images using srcset and Density Descriptors (DPR)</h1>
 
       <p>
         This demo shows how browsers automatically select the best image based
@@ -121,6 +125,16 @@
       <p>
         Open Chrome DevTools and switch between devices to see how the loaded
         image changes.
+      </p>
+
+      <p>
+        Read more on how <code>srcset</code> works with density descriptors in
+        our
+        <a
+          href="https://imagekit.io/responsive-images/#chapter-4---srcset-with-density-descriptors"
+          target="_blank"
+          >Responsive Image Guide</a
+        >.
       </p>
 
       <div class="demo-image">
@@ -139,7 +153,9 @@
       <div class="info-box">
         <p><strong>Device Pixel Ratio:</strong> <span id="dpr"></span></p>
         <p><strong>Image loaded by browser:</strong></p>
-        <p><code id="currentSrc"></code></p>
+        <p>
+          <a id="currentSrc" href="#" target="_blank" style="word-break: break-all;"></a>
+        </p>
       </div>
     </div>
 
@@ -150,7 +166,9 @@
 
       const updateInfo = () => {
         dprEl.textContent = window.devicePixelRatio;
-        currentSrcEl.textContent = img.currentSrc || img.src;
+        const src = img.currentSrc || img.src;
+        currentSrcEl.textContent = src;
+        currentSrcEl.href = src;
       };
 
       updateInfo();
