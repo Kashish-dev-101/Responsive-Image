@@ -2,8 +2,6 @@
 
 Demo project showcasing different responsive image techniques. Each technique has its own dedicated HTML file for easy understanding.
 
-**Live Demo:** [https://kashish-dev-101.github.io/Responsive-Image/](https://kashish-dev-101.github.io/Responsive-Image/)
-
 ---
 
 ## Techniques Covered
@@ -27,6 +25,8 @@ Uses `srcset` with density descriptors like `1x`, `2x`, and `3x` to serve differ
 ```
 
 **When to use:** Fixed-size images that need to look sharp on high-DPI displays.
+
+**Learn more:** [srcset with Density Descriptors](https://imagekit.io/responsive-images/#chapter-4---srcset)
 
 ---
 
@@ -52,6 +52,8 @@ Uses `srcset` with width descriptors (e.g., `640w`, `1080w`) combined with the `
 
 **When to use:** Images that change size based on viewport width (most common use case).
 
+**Learn more:** [srcset with sizes](https://imagekit.io/responsive-images/#chapter-5---srcset-with-sizes)
+
 ---
 
 ### 3. Art Direction with picture Element
@@ -69,6 +71,8 @@ Uses the `<picture>` element to serve completely different images based on viewp
 ```
 
 **When to use:** When you need different image crops or compositions for different screen sizes.
+
+**Learn more:** [Using picture Element](https://imagekit.io/responsive-images/#chapter-6---using-picture-element)
 
 ---
 
@@ -89,6 +93,8 @@ Uses ImageKit transformations `w-auto` and `dpr-auto` with Client Hints. The bro
 ```
 
 **When to use:** When using ImageKit and you want automatic optimization without maintaining multiple srcset URLs.
+
+**Learn more:** [Using Client Hints](https://imagekit.io/responsive-images/#chapter-7---using-client-hints) | Read more on how to use [ImageKit Transformations with Client Hints](https://imagekit.io/docs/image-transformation#client-hints)
 
 ---
 
@@ -111,6 +117,24 @@ For a comprehensive guide on responsive images, check out the [ImageKit Responsi
 4. Check the "Selected image URL" shown below each image to see which variant was loaded
 5. For Client Hints demo, check the Network tab to see request headers
 
+> **Note: Simulating Different Devices in Chrome DevTools**
+>
+> To properly test responsive images you need to simulate different viewport widths, device sizes, and DPR values. Here's how:
+>
+> **Viewport Width & Device Sizes**
+> 1. Open DevTools (F12) and enable the **Device Toolbar** (Ctrl+Shift+M / Cmd+Shift+M)
+> 2. Use the **device dropdown** at the top to pick a preset device (e.g., iPhone 14, iPad, Pixel 7) or select **Responsive** to manually set any width and height
+> 3. In **Responsive** mode, drag the viewport handles or type exact pixel values to test specific breakpoints (e.g., 600px, 900px, 1920px)
+>
+> **Device Pixel Ratio (DPR)**
+> 1. In the device toolbar, click the **three-dot menu (⋮)**
+> 2. Select **Add device pixel ratio**
+> 3. A DPR dropdown appears — switch between **1x**, **2x**, and **3x** to simulate different screen densities
+>
+> Reload the page after changing viewport or DPR to see the browser pick a different image variant.
+>
+> Reference: [Chrome DevTools — Simulate Mobile Devices](https://developer.chrome.com/docs/devtools/device-mode)
+
 ---
 
 ## Project Structure
@@ -121,5 +145,6 @@ Responsive-Image/
 ├── srcset-sizes.html     # Width descriptor + sizes
 ├── picture.html          # Art direction with picture element
 ├── clientHint.html       # Client Hints with ImageKit
+├── style.css             # Shared styles (ImageKit branding)
 └── README.md
 ```
