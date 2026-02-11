@@ -32,171 +32,17 @@
       content='ch-dpr=(self "https://ik.imagekit.io"), ch-width=(self "https://ik.imagekit.io"), ch-viewport-width=(self "https://ik.imagekit.io")'
     />
 
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          sans-serif;
-        background-color: #f6f7f9;
-        margin: 0;
-        padding: 24px;
-        color: #1f2937;
-      }
-
-      .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 32px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      }
-
-      header h1 {
-        font-size: 28px;
-        margin: 0 0 10px;
-        line-height: 1.25;
-      }
-
-      header p {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #4b5563;
-        margin: 0 0 12px;
-      }
-
-      code {
-        display: inline;
-        background: #eef2f7;
-        padding: 2px 8px;
-        border-radius: 8px;
-        font-size: 0.95em;
-        color: #111827;
-      }
-
-      .pill-row {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .pill {
-        background: #f1f5f9;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        padding: 8px 10px;
-        border-radius: 999px;
-        font-size: 13px;
-        color: #111827;
-      }
-
-      .stats {
-        margin-top: 18px;
-        padding: 16px;
-        background: #f1f5f9;
-        border-radius: 12px;
-        font-size: 14px;
-        color: #111827;
-      }
-
-      .stats .row {
-        margin: 6px 0;
-      }
-
-      .grid {
-        margin-top: 18px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-      }
-
-      .card {
-        border-radius: 14px;
-        overflow: hidden;
-        background: #fff;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-      }
-
-      /* No cropping: full image is visible */
-      .thumb {
-        width: 100%;
-        aspect-ratio: 4 / 3;
-        object-fit: contain;
-        background: #e9eef5;
-        display: block;
-      }
-
-      .meta {
-        padding: 14px;
-        background: #f1f5f9;
-        border-top: 1px solid rgba(0, 0, 0, 0.06);
-      }
-
-      .meta .label {
-        font-size: 13px;
-        color: #374151;
-        margin: 0 0 8px;
-        font-weight: 800;
-      }
-
-      .url {
-        display: block;
-        background: #e5e7eb;
-        padding: 10px 10px;
-        border-radius: 10px;
-        font-size: 12px;
-        max-width: 100%;
-        word-break: break-all;
-        line-height: 1.45;
-        color: #2563eb;
-        text-decoration: underline;
-        font-weight: bold;
-      }
-
-      .url:hover {
-        color: #1d4ed8;
-      }
-
-      @media (max-width: 900px) {
-        .container {
-          padding: 24px;
-        }
-        header h1 {
-          font-size: 24px;
-        }
-      }
-
-      @media (max-width: 700px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 600px) {
-        body {
-          padding: 16px;
-        }
-        .container {
-          padding: 18px;
-          border-radius: 12px;
-        }
-        header h1 {
-          font-size: 22px;
-        }
-        header p {
-          font-size: 15px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
+    <nav class="navbar">
+      <a href="srcset-density.html">srcset + DPR</a>
+      <a href="srcset-sizes.html">srcset + sizes</a>
+      <a href="picture.html">picture element</a>
+      <a href="clientHint.html" class="active">Client Hints</a>
+    </nav>
+
     <div class="container">
       <header>
         <h1>Responsive Images using Client Hints (ImageKit)</h1>
@@ -222,7 +68,7 @@
           >.
         </p>
 
-        <div class="pill-row" style="margin-top: 16px">
+        <div class="pill-row">
           <span class="pill">Transformations: w-auto, dpr-auto</span>
           <span class="pill">Hints: Sec-CH-DPR, Sec-CH-Width</span>
           <span class="pill">Accept-CH + Delegate-CH enabled</span>
@@ -238,10 +84,10 @@
         </div>
       </div>
 
-      <section class="grid" aria-label="Client hints responsive images">
+      <section class="grid grid-2" aria-label="Client hints responsive images">
         <article class="card">
           <img
-            class="thumb responsive"
+            class="thumb contain responsive"
             src="https://ik.imagekit.io/Kashish12345/laugher_KDUG1oQdR.jpg?tr=w-auto,dpr-auto"
             alt="Responsive hero image"
             sizes="(max-width: 600px) 100vw, 50vw"
@@ -258,7 +104,7 @@
 
         <article class="card">
           <img
-            class="thumb responsive"
+            class="thumb contain responsive"
             src="https://ik.imagekit.io/Kashish12345/Happy%20daughter_4Bkfin1d0.jpg?tr=w-auto,dpr-auto"
             alt="Responsive content image"
             sizes="(max-width: 600px) 100vw, 50vw"
