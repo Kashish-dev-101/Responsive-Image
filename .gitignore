@@ -1,2 +1,5 @@
 code-walkthrough.txt
 .DS_Store
+
+# Claude Code config
+.claude/
